@@ -23,9 +23,11 @@ sudo apt-get install -y rlwrap
 
 # Install emacs24
 # https://launchpad.net/~cassou/+archive/emacs
-sudo apt-add-repository -y ppa:cassou/emacs
-sudo apt-get -qq update
-sudo apt-get install -y emacs24-nox emacs24-el emacs24-common-non-dfsg
+# sudo apt-add-repository -y ppa:cassou/emacs
+# sudo apt-get -qq update
+# sudo apt-get install -y emacs24-nox emacs24-el emacs24-common-non-dfsg
+# bullshit; install emacs
+sudo apt-get install emacs
 
 # Install Heroku toolbelt
 # https://toolbelt.heroku.com/debian
@@ -38,6 +40,11 @@ sudo sh -c 'echo "deb https://dl.google.com/linux/chrome/deb/ stable main" >> /e
 sudo apt-get update 
 sudo apt-get install google-chrome-stable
 
+# zsh
+sudo apt-get install zsh
+# doxymacs
+sudo apt-get install doxymacs
+
 # git pull and install dotfiles as well
 cd $HOME
 
@@ -45,6 +52,7 @@ git clone https://github.com/jackokaiser/myDotfiles.git
 
 cd myDotfiles
 ./USE_WITH_CAUTION.sh
+
 
 sudo chsh -s /bin/zsh
 

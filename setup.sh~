@@ -38,6 +38,11 @@ sudo sh -c 'echo "deb https://dl.google.com/linux/chrome/deb/ stable main" >> /e
 sudo apt-get update 
 sudo apt-get install google-chrome-stable
 
+# zsh
+sudo apt-get install zsh
+# doxymacs
+sudo apt-get install doxymacs
+
 # git pull and install dotfiles as well
 cd $HOME
 
@@ -45,6 +50,7 @@ git clone https://github.com/jackokaiser/myDotfiles.git
 
 cd myDotfiles
 ./USE_WITH_CAUTION.sh
+
 
 sudo chsh -s /bin/zsh
 
