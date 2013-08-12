@@ -1,6 +1,6 @@
 #!/bin/bash
 # Simple setup.sh for configuring Ubuntu 12.04 LTS EC2 instance
-# for headless setup. 
+# for headless setup.
 
 # Install nvm: node-version manager
 # https://github.com/creationix/nvm
@@ -16,6 +16,7 @@ nvm use v0.10.12
 # Install jshint to allow checking of JS code within emacs
 # http://jshint.com/
 npm install -g jshint
+npm install -g coffee-script
 
 # Install rlwrap to provide libreadline features with node
 # See: http://nodejs.org/api/repl.html#repl_repl
@@ -37,7 +38,7 @@ wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 # Install google chrome
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 sudo sh -c 'echo "deb https://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-sudo apt-get update 
+sudo apt-get update
 sudo apt-get install google-chrome-stable
 
 # zsh
@@ -55,5 +56,3 @@ cd myDotfiles
 
 
 sudo chsh -s /bin/zsh
-
-
