@@ -2,6 +2,8 @@
 # Simple setup.sh for configuring Ubuntu 12.04 LTS EC2 instance
 # for headless setup.
 
+compile_path=`dirname ${0}`
+
 # Install nvm: node-version manager
 # https://github.com/creationix/nvm
 sudo apt-get install -y git
@@ -46,13 +48,36 @@ sudo apt-get install zsh
 # doxymacs
 sudo apt-get install doxymacs
 
-# git pull and install dotfiles as well
+# git pull and install dotfiles
 cd $HOME
-
 git clone https://github.com/jackokaiser/myDotfiles.git
-
 cd myDotfiles
 ./USE_WITH_CAUTION.sh
+
+
+########################################
+########### get redis ################
+########################################
+cd $HOME
+sudo apt-get install tcl8.5
+curl -O http://download.redis.io/releases/redis-stable.tar.gz
+cd redis-stable
+make
+sudo make install
+sudo cp src/redis-cli /usr/local/bin/
+sudo cp src/redis-server /usr/local/bin/
+
+sudo mkdir /etc/redis
+sudo mkdir /var/redis
+sudo cp utils/redis_init_script /etc/init.d/redis_6379
+
+sudo cp ${compile_path}/myRedis.conf /etc/redis/6379.conf
+
+sudo mkdir /var/redis/6379
+sudo update-rc.d redis_6379 defaults
+########################################
+########### done redis ################
+########################################
 
 
 sudo chsh -s /bin/zsh
