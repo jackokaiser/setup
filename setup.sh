@@ -2,7 +2,23 @@
 # Simple setup.sh for configuring Ubuntu 12.04 LTS EC2 instance
 # for headless setup.
 
+
+REDIS=false
+
+while getopts ":r" opt; do
+  case $opt in
+    r)
+        REDIS=true;
+    \?)
+        echo "Invalid option: -$OPTARG" >&2
+        ;;
+  esac
+done
+
+
 compile_path=`dirname ${0}`
+
+
 
 # Install nvm: node-version manager
 # https://github.com/creationix/nvm
@@ -58,23 +74,25 @@ cd myDotfiles
 ########################################
 ########### get redis ################
 ########################################
-cd $HOME
-sudo apt-get install tcl8.5
-curl -O http://download.redis.io/releases/redis-stable.tar.gz
-cd redis-stable
-make
-sudo make install
-sudo cp src/redis-cli /usr/local/bin/
-sudo cp src/redis-server /usr/local/bin/
+if $REDIS ; then
+    cd $HOME
+    sudo apt-get install tcl8.5
+    curl -O http://download.redis.io/releases/redis-stable.tar.gz
+    cd redis-stable
+    make
+    sudo make install
+    sudo cp src/redis-cli /usr/local/bin/
+    sudo cp src/redis-server /usr/local/bin/
 
-sudo mkdir /etc/redis
-sudo mkdir /var/redis
-sudo cp utils/redis_init_script /etc/init.d/redis_6379
+    sudo mkdir /etc/redis
+    sudo mkdir /var/redis
+    sudo cp utils/redis_init_script /etc/init.d/redis_6379
 
-sudo cp ${compile_path}/myRedis.conf /etc/redis/6379.conf
+    sudo cp ${compile_path}/myRedis.conf /etc/redis/6379.conf
 
-sudo mkdir /var/redis/6379
-sudo update-rc.d redis_6379 defaults
+    sudo mkdir /var/redis/6379
+    sudo update-rc.d redis_6379 defaults
+fi
 ########################################
 ########### done redis ################
 ########################################
